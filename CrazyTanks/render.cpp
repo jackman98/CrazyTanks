@@ -1,12 +1,9 @@
 #include "render.h"
-#include <thread>
-#include <chrono>
 #include <iomanip>
 //#include <windows.h>
 
 Render::Render()
 {
-    m = &GameManager::instance();
 }
 
 //
@@ -22,27 +19,32 @@ Render::Render()
 
 void Render::process()
 {
+    int position = (WIDTH / 2 + TITLE.size() / 2);
     while (!m->stopGame) {
-    system("cls");
-//    setcur(0,0);
-    string str;
+        system("cls");
+        //    setcur(0,0);
+        string str;
 
-    cout << setw(m->width / 2 + 6) << "CRAZY TANKS" << endl;
-    cout << "Score: " << m->score << " | Health: " << m->tank->health << " | Time : " << m->timeInGame << endl;
+        cout << setw(position) << TITLE << endl;
+        cout << "Score: " << m->score << " | Health: " << m->tank->health << " | Time : " << m->timeInGame << endl;
 
-    for (size_t i = 0; i < m->field.size(); i++) {
-        for (size_t j = 0; j < m->field.at(i).size(); j++) {
-            str += m->field.at(i).at(j).getCell();
+        //draw field
+        for (size_t i = 0; i < m->field.size(); i++) {
+            for (size_t j = 0; j < m->field.at(i).size(); j++) {
+                str += m->field.at(i).at(j).getCell();
+            }
+            str += "\n";
         }
-        str += "\n";
+        cout << str;
+        this_thread::sleep_for(chrono::milliseconds(RENDER_TIME));
     }
-    cout << str;
-    this_thread::sleep_for(chrono::milliseconds(20));
-    }
-    if (m->victory)
+
+    if (m->victory) {
         cout << "YOU WINNER!!!";
-    else
+    }
+    else {
         cout << "GAME OVER!!!";
+    }
 }
 
 

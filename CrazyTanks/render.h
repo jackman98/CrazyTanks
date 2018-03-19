@@ -2,13 +2,14 @@
 #define RENDER_H
 #include <iostream>
 #include <vector>
-#include "gamemanager.h"
+#include <thread>
+#include <chrono>
+#include "gameproccespart.h"
 
 using namespace std;
 
-class Render
+class Render : public GameProccesPart
 {
-    GameManager *m;
 public:
     Render();
     void process();

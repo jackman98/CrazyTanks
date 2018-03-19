@@ -8,15 +8,13 @@ using namespace std;
 
 class Bullet
 {
-
 public:
     Bullet(int x, int y, Type type, Direction d);
     int x;
     int y;
     Type type;
-    Direction direction = NONE;
+    Direction direction;
     bool isShotMade;
-
 };
 
 #endif // BULLET_H

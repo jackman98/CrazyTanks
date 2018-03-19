@@ -15,23 +15,13 @@
 
 using namespace std;
 
-GameManager *m = &GameManager::instance();
-
-void currentTime() {
-    while (true) {
-        this_thread::sleep_for(chrono::seconds(1));
-        ++m->timeInGame;
-    }
-}
-
 int main()
 {
     srand(time(0));
 
-    auto a = async(launch::async, currentTime);
-
+    //create and start game world
     World w;
-    w.start();
+    w.startGame();
 
     return 0;
 }

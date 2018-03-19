@@ -5,16 +5,17 @@
 #include "input.h"
 #include "logic.h"
 #include "ai.h"
+#include "timer.h"
 #include "gamemanager.h"
 
 using namespace std;
 
 class World
 {
-
     Render render;
     Input input;
     Logic logic;
+    Timer timer;
     EnemyTankAI ai;
 
     GameManager *m;
@@ -25,7 +26,7 @@ class World
 
 public:
     World();
-    void start();
+    void startGame();
 };
 
 #endif // WORLD_H

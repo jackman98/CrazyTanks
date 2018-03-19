@@ -1,11 +1,12 @@
 #ifndef INPUT_H
 #define INPUT_H
 #include <conio.h>
-#include "gamemanager.h"
+#include <thread>
+#include <chrono>
+#include "gameproccespart.h"
 
-class Input
+class Input : public GameProccesPart
 {
-    GameManager *m;
 public:
     Input();
     void process();

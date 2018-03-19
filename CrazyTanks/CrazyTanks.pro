@@ -12,7 +12,9 @@ SOURCES += main.cpp \
     world.cpp \
     bulletaction.cpp \
     logic.cpp \
-    ai.cpp
+    ai.cpp \
+    gameproccespart.cpp \
+    timer.cpp
 
 HEADERS += \
     tank.h \
@@ -24,4 +26,7 @@ HEADERS += \
     world.h \
     bulletaction.h \
     logic.h \
-    ai.h
+    ai.h \
+    constants.h \
+    gameproccespart.h \
+    timer.h

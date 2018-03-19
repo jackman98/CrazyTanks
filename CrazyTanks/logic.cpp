@@ -2,17 +2,19 @@
 
 Logic::Logic()
 {
-    m = &GameManager::instance();
 }
 
 void Logic::process()
 {
     while (!m->stopGame) {
+        //my bullet pull processing
         for(size_t i = 0; i < m->myBullets.size(); i++) {
             if (m->myBullets[i] != nullptr) {
+                //if the shot was fired
                 if (m->myBullets[i]->isShotMade) {
+                    //continue to move the bullet
                     BulletAction ba;
-                    ba.shot(*m->myBullets[i], m->enemyTanks);
+                    ba.shot(*m->myBullets[i]);
                 }
                 else {
                     delete m->myBullets[i];
@@ -23,13 +25,14 @@ void Logic::process()
             }
         }
 
-        vector<Tank *> myTanks;
-        myTanks.push_back(m->tank);
+        //enemy bullet pull processing
         for(size_t i = 0; i < m->enemyBullets.size(); i++) {
             if (m->enemyBullets[i] != nullptr) {
+                //if the shot was fired
                 if (m->enemyBullets[i]->isShotMade) {
+                    //continue to move the bullet
                     BulletAction ba;
-                    ba.shot(*m->enemyBullets[i], myTanks);
+                    ba.shot(*m->enemyBullets[i]);
                 }
                 else {
                     delete m->enemyBullets[i];
@@ -40,11 +43,18 @@ void Logic::process()
             }
         }
 
-        if (m->enemyTanks.size() != (size_t)m->countOfEnemyTanks) {
-            m->score = m->countOfEnemyTanks - m->enemyTanks.size();
+        for (int i = 0; i < m->enemyTanks.size(); ++i) {
+            //if the tank zero health increases the score and remove the tank
+            if (m->enemyTanks[i]->health == 0) {
+                m->score++;
+                delete m->enemyTanks[i];
+                m->enemyTanks[i] = nullptr;
+                m->enemyTanks.erase(m->enemyTanks.begin() + i);
+                vector<Tank *>(m->enemyTanks).swap(m->enemyTanks);
+            }
         }
 
-        if (myTanks.empty()) {
+        if (m->tank->health == 0) {
             m->stopGame = true;
             m->victory = false;
             return;
@@ -55,8 +65,6 @@ void Logic::process()
             m->victory = true;
             return;
         }
-        this_thread::sleep_for(chrono::milliseconds(45));
-
+        this_thread::sleep_for(chrono::milliseconds(BULLET_SPEED));
     }
-
 }

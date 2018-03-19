@@ -2,7 +2,7 @@
 
 Cell::Cell(std::string c) : code(c)
 {
-
+    id = -1;
 }
 
 std::string Cell::getCell() const

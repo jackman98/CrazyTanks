@@ -1,13 +1,11 @@
 #ifndef AI_H
 #define AI_H
 #include "tank.h"
-#include "gamemanager.h"
+#include "gameproccespart.h"
 #include <thread>
 
-class EnemyTankAI
+class EnemyTankAI : public GameProccesPart
 {
-    GameManager *m;
-
     Direction getRandomDirection();
     void moving();
     void shoting();

@@ -4,6 +4,7 @@ Bullet::Bullet(int x, int y, Type type, Direction d) : x(x), y(y), type(type), d
 {
     isShotMade = true;
 
+    //calculation bullet start point
     switch (d) {
     case LEFT:
            this->x--;

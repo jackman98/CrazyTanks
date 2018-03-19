@@ -8,8 +8,7 @@ public:
     Cell(std::string c);
     std::string getCell() const;
     void setCell(std::string c);
-    int id = -1;
-
+    int id;
 private:
     std::string code;
 };

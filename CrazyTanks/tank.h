@@ -2,10 +2,11 @@
 #define TANK_H
 #include <vector>
 #include <cell.h>
+#include "constants.h"
 
 using namespace std;
 
-enum Direction {
+enum Direction {///class
     UP,
     DOWN,
     LEFT,
@@ -20,18 +21,19 @@ enum Type {
 
 class Tank
 {
+    bool checkingFreePlaceBeforeTank(vector<vector<Cell> > &field, Direction direction);
+
 public:
     int x;
     int y;
-    int health = 2;
+    int health;
     int id;
     Direction direction;
     Type type;
 
     Tank(vector<vector<Cell> > &field, int x, int y, int id, Type type);
-    void move(vector<vector<Cell> > &field,  Direction direction);
-    void paintMainTank(vector<vector<Cell> > &field, Direction d);
-    void paintEnemyTank(vector<vector<Cell> > &field, Direction d);
+    void move(vector<vector<Cell> > &field, Direction direction);
+    void paintTank(vector<vector<Cell> > &field, Direction d);
     void shot();
 };
 

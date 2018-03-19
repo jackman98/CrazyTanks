@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include "bullet.h"
+#include "constants.h"
 
 using namespace std;
 
@@ -15,14 +16,9 @@ public:
     return singleton;
   }
 
-  int score = 0;
-  int timeInGame = 0;
-  const int width = 78;
-  const int height = 26;
-  const int countOfEnemyTanks = 5;
-  const int myHealth = 3;
-
-  bool stopGame = false;
+  int score;
+  int timeInGame;
+  bool stopGame;
   bool victory;
   vector<Bullet *> myBullets;
   vector<Bullet *> enemyBullets;
@@ -32,7 +28,7 @@ public:
   Tank *tank;
   Tank *enemyTank;
 private:
-  GameManager() {}
+  GameManager() : score(0), timeInGame(0), stopGame(false), victory(false) {}
   ~GameManager() {}
   GameManager(const GameManager&);
   GameManager& operator=(const GameManager&);

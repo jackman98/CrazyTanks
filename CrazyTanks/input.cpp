@@ -1,38 +1,37 @@
 #include "input.h"
 #include "bullet.h"
-#include <future>
 
 Input::Input()
 {
-    m = &GameManager::instance();
 }
 
 void Input::process()
 {
+    auto myTank = m->tank;
     while (!m->stopGame) {
+        //key processing
         if (_kbhit()) {
             switch (_getch()) {
             case 72:
-                m->tank->move(m->field, UP);
+                myTank->move(m->field, UP);
                 break;
             case 80:
-                m->tank->move(m->field, DOWN);
+                myTank->move(m->field, DOWN);
                 break;
             case 75:
-                m->tank->move(m->field, LEFT);
+                myTank->move(m->field, LEFT);
                 break;
             case 77:
-                m->tank->move(m->field, RIGHT);
+                myTank->move(m->field, RIGHT);
                 break;
             case 32: {
-                Bullet *b = new Bullet (m->tank->x, m->tank->y, m->tank->type, m->tank->direction);
+                //create new bullet and add in myBullets pull
+                Bullet *b = new Bullet (myTank->x, myTank->y, myTank->type, myTank->direction);
                 m->myBullets.push_back(b);
                 break;
             }
-            default:
-                break;
             }
         }
-        this_thread::sleep_for(chrono::milliseconds(20));
+        this_thread::sleep_for(chrono::milliseconds(INPUT_TIME));
     }
 }
